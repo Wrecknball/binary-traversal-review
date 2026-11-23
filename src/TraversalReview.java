@@ -23,7 +23,15 @@ public class TraversalReview {
      * @return three times the sum of the nodes in the tree
      */
     public static int tripleSum(TreeNode node) {
-        return -1;
+        if (node == null) {
+            return 0;
+        }
+        int sum = 0;
+
+        sum += tripleSum(node.left);
+        sum += tripleSum(node.right);
+        return 3* node.data + sum;
+        // return 3* node.data + tripleSum(node.left) + tripleSum(node.right);
     }
 
     /**
@@ -50,7 +58,18 @@ public class TraversalReview {
      * @return the sum of the positive values in the tree
      */
     public static int positiveSum(TreeNode node) {
-        return -1;
+        if (node == null) {
+            return 0;
+        }
+        int sum = 0;
+        
+        if (node.data >= 0) {
+            sum += node.data;  
+        }
+        sum += positiveSum(node.left);
+        sum += positiveSum(node.right);
+
+        return sum;
     }
 
     /**
@@ -76,7 +95,24 @@ public class TraversalReview {
      * @return
      */
     public static int evenMax(TreeNode node) {
-        return Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
+        if (node == null) {
+            return Integer.MIN_VALUE;
+        }
+        int leftMax = evenMax(node.left);
+        int rightMax = evenMax(node.right);
+        
+        if (leftMax > max && leftMax % 2 == 0) {
+            max = leftMax;
+        }
+        if (rightMax > max && rightMax % 2 == 0) {
+            max = rightMax;  
+        }
+        if (node.data > max && node.data % 2 == 0) {
+            max = node.data;  
+        }
+
+        return max;
     }
 
     /**
